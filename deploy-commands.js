@@ -4,7 +4,9 @@ const path = require('path');
 require('dotenv').config();
 
 const commands = [];
-const commandsPath = path.join(__dirname, 'commands');
+const primaryCommandsPath = path.join(__dirname, 'commands');
+const altCommandsPath = path.join(process.cwd(), 'commands');
+const commandsPath = fs.existsSync(primaryCommandsPath) ? primaryCommandsPath : altCommandsPath;
 
 if (fs.existsSync(commandsPath)) {
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));

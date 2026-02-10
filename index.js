@@ -24,7 +24,9 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
+const primaryCommandsPath = path.join(__dirname, 'commands');
+const altCommandsPath = path.join(process.cwd(), 'commands');
+const commandsPath = fs.existsSync(primaryCommandsPath) ? primaryCommandsPath : altCommandsPath;
 
 // Check if commands directory exists
 if (fs.existsSync(commandsPath)) {
